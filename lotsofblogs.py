@@ -4,11 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from database_setup import Region, Base, RegionBlog
 
 engine = create_engine('sqlite:///regionblogs.db')
-
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
-
 session = DBSession()
 
 # Manhattan
