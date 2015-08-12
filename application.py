@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import Flask, render_template, request, redirect, jsonify, flash, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Region, RegionBlog
@@ -81,7 +81,7 @@ def newRegionBlog(region_id):
             url=request.form['url'], region_id=region_id)
         session.add(newItem)
         session.commit()
-
+        flash("new blog added!")
         return redirect(url_for('showBlogs', region_id=region_id))
     else:
         return render_template('newRegionBlog.html', region_id=region_id)
@@ -125,4 +125,4 @@ def deleteRegionBlog(region_id, blog_id):
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8080)
