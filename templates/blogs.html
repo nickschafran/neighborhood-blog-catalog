@@ -27,13 +27,12 @@
 
         {% for i in items %}
 
-        <p>{{i.name}}</p>
+        <p><a href="{{i.url}}">{{i.name}}</a></p>
     
 
         <p>{{i.description}}</p>
     
 
-        <p>{{i.url}}</p>
     
         <a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}' >Edit</a>
     </br>
