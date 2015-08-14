@@ -1,27 +1,27 @@
-<html>
+<!DOCTYPE html>
 
+<html>
 <head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-    </head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
 <body>
 
-<h1>New Menu Item</h1>
+    <h1>New Menu Item</h1>
 
-<form action="#" method = 'post'>
+    <form action="#" method = 'post'>
 
+        <p>Name:</p>
+            <input type ='text' size='30' name='name'>
+        <p>Description:</p>
+            <input type ='text' size='30' name='description'>
+        <p>Price:</p>
+            <input type ='text' size='30' name='url'>
+        </br>
 
-    <p>Name:</p>
-        <input type ='text' size='30' name='name'>
-    <p>Description:</p>
-        <input type ='text' size='30' name='description'>
-    <p>Price:</p>
-        <input type ='text' size='30' name='url'>
-    </br>
+        <input type='submit' value='Create'>
 
-
-<input type='submit' value='Create'>
-
-</form>
+    </form>
 
 </body>
 </html>

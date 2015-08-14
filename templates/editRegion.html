@@ -1,28 +1,27 @@
+<!DOCTYPE html>
+
 <html>
-
-
 <head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-    </head>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+</head>
 
 <body>
 
-<h1> Edit Neighborhood </h1>
+    <h1> Edit Neighborhood </h1>
 
-
-<form action="{{ url_for('editRegion',region_id = region.id)}}" method = 'post'>
-
+    <form action="{{ url_for('editRegion',region_id = region.id)}}" method = 'post'>
 
     <p>Name:</p>
         <input type ='text' size='30' name='name' placeholder = '{{region.name }}'>
 
+    <input type='submit' value='Edit'>
 
-<input type='submit' value='Edit'>
 
+    <a href = '{{url_for('showRegions')}}'> Cancel </a>
+    </form>
 
-<a href = '{{url_for('showRegions')}}'> Cancel </a>
-
-</form>
 </body>
-
 </html>

@@ -1,32 +1,29 @@
+<!DOCTYPE html>
+
 <html>
 
 <head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
 
 <body>
-<div class = 'pane'>
-<h1>Neighborhoods</h1>
+    <div class = 'pane'>
+    <h1>Neighborhoods</h1>
 
-<a href="{{url_for('newRegion')}}" > <h3> Add a Neighborhood </h3> </a>
+    <a href="{{url_for('newRegion')}}" > <h3> Add a Neighborhood </h3> </a>
 
-{% for region in regions %}
+    {% for region in regions %}
 
+    <a href = "{{url_for('showBlogs', region_id = region.id)}}"> <p>{{region.name}}</p></a>
 
+    <p><a href = "{{url_for('editRegion',region_id = region.id)}}">Edit Neighborhood</a></p>
 
-<a href = "{{url_for('showBlogs', region_id = region.id)}}"> <p>{{region.name}}</p></a>
+    <p> <a href = "{{url_for('deleteRegion',region_id = region.id)}}">Delete Neighborhood</a> </p>
 
-<p><a href = "{{url_for('editRegion',region_id = region.id)}}">Edit Neighborhood</a></p>
+    {% endfor %}
 
-<p> <a href = "{{url_for('deleteRegion',region_id = region.id)}}">Delete Neighborhood</a> </p>
-
-
-
-
-{% endfor %}
-
-</div>
+    </div>
 </body>
 
 </html>

@@ -1,15 +1,17 @@
+<!DOCTYPE html>
+
 <html>
-    
 <head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <div class = 'pane'>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+    <div class = 'pane'>
         <h1>{{ region.name }}</h1>
         
         {% with messages = get_flashed_messages() %}
-      {% if messages %}
-          
+        {% if messages %}
+
         <ul>
         {% for message in messages %}
             <li> <strong> {{ message }} </strong> </li>
@@ -19,7 +21,6 @@
     {% endwith %}
 
     {% if items !=[] %}
-
         <a href = "{{url_for('newRegionBlog', region_id = region.id )}}">Add  Blog</a>
     </br></br>
 
@@ -28,34 +29,19 @@
         {% for i in items %}
 
         <p><a href="{{i.url}}">{{i.name}}</a></p>
-    
-
         <p>{{i.description}}</p>
-    
-
-    
         <a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}' >Edit</a>
-    </br>
-    <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}' >Delete</a>
-</br>
-</br>
-
+        </br>
+        <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}' >Delete</a>
+        </br>
+        </br>
         {% endfor %}
-
-        
-
         </br></br>
-
-
-
-        
-        
-
         {% else %}
         <p> There are currently no blogs for this neighborhood. <p>
         <a href = "{{url_for('newRegionBlog', region_id = region.id )}}">Add Blog</a>
             {% endif %}
-</div>
-    </body>
+    </div>
 
+</body>
 </html>
