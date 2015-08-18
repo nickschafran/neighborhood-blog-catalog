@@ -20,6 +20,18 @@ def showRegions():
     return render_template('regions.html', regions=regions)
 
 
+# About page
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+# Contact page
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
 # Create a new region
 @app.route('/region/new/', methods=['GET', 'POST'])
 def newRegion():
