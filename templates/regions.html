@@ -1,64 +1,71 @@
 <!DOCTYPE html>
-<html<html lang="en">
-<head>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="icon" href"#">
 
     <title>Neighborhood Blog Directory</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-</head>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-<body>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{url_for('showRegions')}}">Neighborhood Blog Directory</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="{{url_for('newRegion')}}">Add Neigborhood</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="{{url_for('showRegions')}}">Home</a></li>
+            <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
+            <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
+
+
           </ul>
-        </div><!--/.nav-collapse -->
+        </nav>
+        <h3 class="text-muted">Neighborhood Blog Directory</h3>
       </div>
-    </nav>
 
-    <div class = 'container'>
+      <div class="jumbotron">
+        <h1>Neighborhood Blogs</h1>
+        <p class="lead">From finding out when a new restaurant is opening to complaining about that new eyesore development, neighborhood blogs keep you in tune with what's happening in your community.</p>
+        <p><a class="btn btn-lg btn-success" href="{{url_for('newRegion')}}" role="button">Add a Neighborhood</a></p>
+      </div>
 
-      <div class="starter-template">
+      <div class="row marketing">
+          {% for region in regions %}
 
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+          <div class="col-lg-3">
+
+          <h4><a href = "{{url_for('showBlogs', region_id = region.id)}}"><p>{{region.name}}</a></h4>
+          </p></a></h4></div>
+          {% endfor %}
+
+      </div>
+
+      <footer class="footer">
+       <!-- <p>&copy; Nicholas Schafran 2015</p> -->
+      </footer>
+
+    </div> <!-- /container -->
 
 
-    {% for region in regions %}
-
-    <a href = "{{url_for('showBlogs', region_id = region.id)}}"><p>{{region.name}}</a> <a href = "{{url_for('editRegion',region_id = region.id)}}">Edit</a> <a href = "{{url_for('deleteRegion',region_id = region.id)}}">Delete</a> </p></p></p>
-
-    {% endfor %}
-    </a></div>
-</div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-</body>
+  </body>
 </html>
