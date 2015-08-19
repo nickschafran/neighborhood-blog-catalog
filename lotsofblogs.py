@@ -16,49 +16,51 @@ session.add(manhattan)
 session.commit()
 
 boweryBoogie = RegionBlog(
-    name="Bowery Boogie", description="description",
+    name="Bowery Boogie",
+    description="Focuses on the area surrounding the Bowery",
     url="http://www.boweryboogie.com/", region=manhattan)
 
 session.add(boweryBoogie)
 session.commit()
 
 evGrieve = RegionBlog(
-    name="EV Grieve", description="description",
+    name="EV Grieve", description="Pessimisticly titled East Village blog",
     url="http://evgrieve.com/", region=manhattan)
 
 session.add(evGrieve)
 session.commit()
 
 westSideRag = RegionBlog(
-    name="West Side Rag", description="description",
+    name="West Side Rag", description="Covering the Upper West Side",
     url="http://www.westsiderag.com/", region=manhattan)
 
 session.add(westSideRag)
 session.commit()
 
 washSqBlog = RegionBlog(
-    name="Washington Square Park Blog", description="description",
+    name="Washington Square Park Blog",
+    description="Greenwich Village based blog",
     url="http://www.washingtonsquareparkblog.com", region=manhattan)
 
 session.add(washSqBlog)
 session.commit()
 
 tribecaCitizen = RegionBlog(
-    name="Tribeca Citizen", description="description",
+    name="Tribeca Citizen", description="Covering Tribeca",
     url="http://tribecacitizen.com", region=manhattan)
 
 session.add(tribecaCitizen)
 session.commit()
 
 morningsider = RegionBlog(
-    name="Morningsider", description="description",
+    name="Morningsider", description="Covering the Morningside Heights area",
     url="http://morningsider.com", region=manhattan)
 
 session.add(morningsider)
 session.commit()
 
 roosIslander = RegionBlog(
-    name="Roosevelt Islander", description="description",
+    name="Roosevelt Islander", description="Covering Roosevelt Island",
     url="http://rooseveltislander.blogspot.com", region=manhattan)
 
 session.add(roosIslander)
@@ -71,70 +73,71 @@ session.add(brooklyn)
 session.commit()
 
 bushwickDaily = RegionBlog(
-    name="Bushwick Daily", description="description",
+    name="Bushwick Daily",
+    description="Arts and development centered blog covering the Bushwick and East Williamsburg Area",
     url="http://bushwickdaily.com/", region=brooklyn)
 
 session.add(bushwickDaily)
 session.commit()
 
 greenpointers = RegionBlog(
-    name="Greenpointers", description="description",
+    name="Greenpointers", description="Covering North Brooklyn, north of McCaren Park",
     url="http://greenpointers.com/", region=brooklyn)
 
 session.add(greenpointers)
 session.commit()
 
 freeWilliamsburg = RegionBlog(
-    name="Free Williamsburg", description="description",
+    name="Free Williamsburg", description="Longstanding Williamsburg blog",
     url="http://freewilliamsburg.com/", region=brooklyn)
 
 session.add(freeWilliamsburg)
 session.commit()
 
 brownstoner = RegionBlog(
-    name="Brownstoner", description="description",
+    name="Brownstoner", description="Development-focused Brooklyn blog",
     url="http://www.brownstoner.com/", region=brooklyn)
 
 session.add(brownstoner)
 session.commit()
 
 heresParkSlope = RegionBlog(
-    name="Here's Park Slope", description="description",
+    name="Here's Park Slope", description="Covering Park Slope",
     url="http://www.heresparkslope.com/", region=brooklyn)
 
 session.add(heresParkSlope)
 session.commit()
 
 brokelyn = RegionBlog(
-    name="Brokelyn", description="description",
+    name="Brokelyn", description="budget concious blog focusing on frugal events and meals in Brooklyn",
     url="http://brokelyn.com/", region=brooklyn)
 
 session.add(brokelyn)
 session.commit()
 
 ditmasParkCorner = RegionBlog(
-    name="Ditmas Park Corner", description="description",
+    name="Ditmas Park Corner", description="Covering Ditmas Park",
     url="http://ditmasparkcorner.com", region=brooklyn)
 
 session.add(ditmasParkCorner)
 session.commit()
 
 SheepsheadBites = RegionBlog(
-    name="Sheepshead Bites", description="description",
+    name="Sheepshead Bites", description="Food and drink in Sheepshead Bay",
     url="http://www.sheepsheadbites.com", region=brooklyn)
 
 session.add(SheepsheadBites)
 session.commit()
 
 BklynHeightsBlgo = RegionBlog(
-    name="Brooklyn Heights Blog", description="description",
+    name="Brooklyn Heights Blog", description="Covering Brooklyn Heights",
     url="http://brooklynheightsblog.com", region=brooklyn)
 
 session.add(BklynHeightsBlgo)
 session.commit()
 
 rockawayist = RegionBlog(
-    name="Rockawayist", description="description",
+    name="Rockawayist", description="Covering the Rockaways",
     url="http://rockawayist.com", region=brooklyn)
 
 session.add(rockawayist)
@@ -147,35 +150,36 @@ session.add(queens)
 session.commit()
 
 queensCrap = RegionBlog(
-    name="Queens Crap", description="description",
+    name="Queens Crap",
+    description="blog dedicated to harshly criticizing the over-development of Queens neighborhoods",
     url="http://queenscrap.blogspot.com/", region=queens)
 
 session.add(queensCrap)
 session.commit()
 
 sunnysidePost = RegionBlog(
-    name="Sunnyside Post", description="description",
+    name="Sunnyside Post", description="Covering Sunnyside",
     url="http://sunnysidepost.com/", region=queens)
 
 session.add(sunnysidePost)
 session.commit()
 
 queensBrownstoner = RegionBlog(
-    name="Brownstoner Queens", description="description",
+    name="Brownstoner Queens", description="Queens offshoot of the development based blog",
     url="http://queens.brownstoner.com/", region=queens)
 
 session.add(queensBrownstoner)
 session.commit()
 
 weHeartAstoria = RegionBlog(
-    name="We Heart Astoria", description="description",
+    name="We Heart Astoria", description="Covering Astoria",
     url="http://weheartastoria.com/", region=queens)
 
 session.add(weHeartAstoria)
 session.commit()
 
 licCourtSquare = RegionBlog(
-    name="LIC Court Square", description="description",
+    name="LIC Court Square", description="Covering Long Island City",
     url="http://liccourtsquare.com", region=queens)
 
 session.add(licCourtSquare)
@@ -188,49 +192,49 @@ session.add(bronx)
 session.commit()
 
 bronxSocialite = RegionBlog(
-    name="Bronx Socialite", description="description",
+    name="Bronx Socialite", description="Covering the Bronx",
     url="http://thebronxsocialite.com/", region=bronx)
 
 session.add(bronxSocialite)
 session.commit()
 
 bronxCentric = RegionBlog(
-    name="Bronx Centric", description="description",
+    name="Bronx Centric", description="Covering the Bronx",
     url="http://bronxcentric.org/", region=bronx)
 
 session.add(bronxCentric)
 session.commit()
 
 bronxHipster = RegionBlog(
-    name="Bronx Hipster", description="description",
+    name="Bronx Hipster", description="Covering the Bronx",
     url="http://bronxhipster.tumblr.com/", region=bronx)
 
 session.add(bronxHipster)
 session.commit()
 
 bronxMama = RegionBlog(
-    name="Bronx Mama", description="description",
+    name="Bronx Mama", description="Covering the Bronx",
     url="http://bronxmama.com/", region=bronx)
 
 session.add(bronxMama)
 session.commit()
 
 bronxPR = RegionBlog(
-    name="Bronx PR", description="description",
+    name="Bronx PR", description="Self proclaimed unnofficialBronx Public Relations site",
     url="http://bronx-pr.com/", region=bronx)
 
 session.add(bronxPR)
 session.commit()
 
 welcome2 = RegionBlog(
-    name="Welcome 2 the Bronx", description="description",
+    name="Welcome 2 the Bronx", description="Covering the Bronx",
     url="http://www.welcome2thebronx.com/wordpress/", region=bronx)
 
 session.add(welcome2)
 session.commit()
 
 bronxBanter = RegionBlog(
-    name="Bronx Banter", description="description",
+    name="Bronx Banter", description="Covering the Bronx",
     url="http://www.bronxbanterblog.com/", region=bronx)
 
 session.add(bronxBanter)
@@ -243,7 +247,7 @@ session.add(statenIsland)
 session.commit()
 
 statenIslandGenealogy = RegionBlog(
-    name="Staten Island Genealogy", description="description",
+    name="Staten Island Genealogy", description="Historically themed Staten Island blog",
     url="https://statenislandgenealogy.wordpress.com/", region=statenIsland)
 
 session.add(statenIslandGenealogy)
@@ -256,42 +260,42 @@ session.add(hudsonValley)
 session.commit()
 
 newburghRest = RegionBlog(
-    name="Newburgh Restoration", description="description",
+    name="Newburgh Restoration", description="Covering the revitalization of historic Newburgh, NY buildings",
     url="http://newburghrestoration.com/", region=hudsonValley)
 
 session.add(newburghRest)
 session.commit()
 
 sloatsVill = RegionBlog(
-    name="Sloatsburg Village", description="description",
+    name="Sloatsburg Village", description="covering the Rockland and Orange County communities lining Harriman State Park",
     url="http://www.sloatsburgvillage.com", region=hudsonValley)
 
 session.add(sloatsVill)
 session.commit()
 
 littleBeacon = RegionBlog(
-    name="A Little Beacon Blog", description="description",
+    name="A Little Beacon Blog", description="Covering Beacon, NY",
     url="http://www.alittlebeaconblog.com", region=hudsonValley)
 
 session.add(littleBeacon)
 session.commit()
 
 goToHudson = RegionBlog(
-    name="Go to Hudson", description="description",
+    name="Go to Hudson", description="Covering Hudson, NY",
     url="http://gotohudson.net/wordpress/", region=hudsonValley)
 
 session.add(goToHudson)
 session.commit()
 
 haverstrawLife = RegionBlog(
-    name="Haverstraw Life", description="description",
+    name="Haverstraw Life", description="Covering Haverstraw, NY",
     url="http://haverstrawlife.com", region=hudsonValley)
 
 session.add(haverstrawLife)
 session.commit()
 
 nyackFreeP = RegionBlog(
-    name="Nyack Free Press", description="description",
+    name="Nyack Free Press", description="Covering Nyack, NY",
     url="http://nyackfreepress.blogspot.com", region=hudsonValley)
 
 session.add(nyackFreeP)
@@ -304,14 +308,14 @@ session.add(longIsland)
 session.commit()
 
 longIslandNewYork = RegionBlog(
-    name="Long Island New York", description="description",
+    name="Long Island New York", description="covering Long Island",
     url="http://longislandnewyork.blogspot.com", region=longIsland)
 
 session.add(longIslandNewYork)
 session.commit()
 
 hamptonsChat = RegionBlog(
-    name="Hamptons Chatter", description="description",
+    name="Hamptons Chatter", description="covering the Hamptons",
     url="http://hamptonschatter.blogspot.com", region=longIsland)
 
 session.add(hamptonsChat)
@@ -324,14 +328,14 @@ session.add(newJersey)
 session.commit()
 
 hobGirl = RegionBlog(
-    name="Hoboken Girl", description="description",
+    name="Hoboken Girl", description="covering Hoboken, NJ",
     url="http://hobokengirl.com", region=newJersey)
 
 session.add(hobGirl)
 session.commit()
 
 chicPea = RegionBlog(
-    name="Chic Pea Jersey City", description="description",
+    name="Chic Pea Jersey City", description="covering Jersey City, NJ",
     url="http://www.chicpeajc.com", region=newJersey)
 
 session.add(chicPea)
@@ -344,42 +348,42 @@ session.add(upstate)
 session.commit()
 
 parlorCity = RegionBlog(
-    name="Parlor City Punk", description="description",
+    name="Parlor City Punk", description="covering the Punk music scene in the Southern Tier",
     url="http://parlorcitypunk.tumblr.com", region=upstate)
 
 session.add(parlorCity)
 session.commit()
 
 buffaloBlog = RegionBlog(
-    name="Buffalo Blog", description="description",
+    name="Buffalo Blog", description="covering Buffalo, NY",
     url="http://www.buffablog.com", region=upstate)
 
 session.add(buffaloBlog)
 session.commit()
 
 buffaloRising = RegionBlog(
-    name="Buffalo Rising", description="description",
+    name="Buffalo Rising", description="covering Buffalo, NY",
     url="http://buffalorising.com", region=upstate)
 
 session.add(buffaloRising)
 session.commit()
 
 northCountryRambler = RegionBlog(
-    name="North Country Rambler", description="description",
+    name="North Country Rambler", description="covering the North Country region in New York State",
     url="http://northcountryrambler.blogspot.com", region=upstate)
 
 session.add(northCountryRambler)
 session.commit()
 
 rochesterSubway = RegionBlog(
-    name="Rochester Subway", description="description",
+    name="Rochester Subway", description="covering Rochester, NY",
     url="http://www.rochestersubway.com/", region=upstate)
 
 session.add(rochesterSubway)
 session.commit()
 
 centralNY = RegionBlog(
-    name="My Central New York", description="description",
+    name="My Central New York", description="covering Central NY",
     url="http://mycentralnewyork.blogspot.com", region=upstate)
 
 session.add(centralNY)
