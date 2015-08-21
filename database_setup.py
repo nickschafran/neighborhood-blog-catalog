@@ -14,6 +14,7 @@ class Region(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+#    description = Column(String(250), nullable=False)
 
     @property
     def serialize(self):
@@ -21,12 +22,13 @@ class Region(Base):
         return {
             'name': self.name,
             'id': self.id,
+#            'description': self.description
         }
 
 
 class RegionBlog(Base):
     """Blogs focusing on Regions"""
-    __tablename__ = 'menu_item'
+    __tablename__ = 'region_blog'
 
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
