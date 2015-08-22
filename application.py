@@ -12,6 +12,29 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# Region Blogs JSON
+@app.route('/region/<int:region_id>/blogs/JSON')
+def regionBlogsJSON(region_id):
+    items = session.query(RegionBlog).filter_by(
+        region_id=region_id).all()
+    return jsonify(RegionBlogs=[i.serialize for i in items])
+
+
+# Specific Blog JSON
+@app.route('/region/<int:region_id>/blogs/<int:blog_id>/JSON')
+def blogJSON(region_id, blog_id):
+    Blog = session.query(RegionBlog).filter_by(id=blog_id).one()
+    return jsonify(Blog=Blog.serialize)
+
+
+# Regions JSON
+@app.route('/region/JSON')
+def regionsJSON():
+    regions = session.query(Region).all()
+    return jsonify(regions=[r.serialize for r in regions])
+
+
+
 # Show all regions
 @app.route('/')
 @app.route('/region/')
@@ -93,7 +116,7 @@ def newRegionBlog(region_id):
             url=request.form['url'], region_id=region_id)
         session.add(newItem)
         session.commit()
-        flash("new blog added!")
+#        flash("new blog added!")
         return redirect(url_for('showBlogs', region_id=region_id))
     else:
         return render_template('newRegionBlog.html', region_id=region_id)
