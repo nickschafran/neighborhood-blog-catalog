@@ -201,7 +201,10 @@ def newRegion():
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
-        newRegion = Region(name=request.form['name'])
+        # Region w/ description
+        newRegion = Region(
+            name=request.form['name'], description=request.form['description'])
+
         session.add(newRegion)
         session.commit()
         return redirect(url_for('showRegions'))

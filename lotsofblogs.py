@@ -10,7 +10,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Manhattan
-manhattan = Region(name="Manhattan")
+manhattan = Region(name="Manhattan", description="New York County, a longer description will come")
 
 session.add(manhattan)
 session.commit()
@@ -67,7 +67,7 @@ session.add(roosIslander)
 session.commit()
 
 # Brooklyn
-brooklyn = Region(name="Brooklyn")
+brooklyn = Region(name="Brooklyn", description="Kings County, a longer description will come")
 
 session.add(brooklyn)
 session.commit()
@@ -144,7 +144,7 @@ session.add(rockawayist)
 session.commit()
 
 # Queens
-queens = Region(name="Queens")
+queens = Region(name="Queens", description="Queens County, a longer description will come")
 
 session.add(queens)
 session.commit()
@@ -186,7 +186,7 @@ session.add(licCourtSquare)
 session.commit()
 
 # Bronx
-bronx = Region(name="The Bronx")
+bronx = Region(name="The Bronx", description="bronx county, a longer description to come")
 
 session.add(bronx)
 session.commit()
@@ -241,7 +241,7 @@ session.add(bronxBanter)
 session.commit()
 
 # Staten Island
-statenIsland = Region(name="Staten Island")
+statenIsland = Region(name="Staten Island", description="richmond county, a longer description to come")
 
 session.add(statenIsland)
 session.commit()
@@ -254,7 +254,7 @@ session.add(statenIslandGenealogy)
 session.commit()
 
 # Hudson Valley
-hudsonValley = Region(name="Hudson Valley")
+hudsonValley = Region(name="Hudson Valley", description="NY's hudson valley region")
 
 session.add(hudsonValley)
 session.commit()
@@ -302,7 +302,7 @@ session.add(nyackFreeP)
 session.commit()
 
 # Long Island
-longIsland = Region(name="Long Island")
+longIsland = Region(name="Long Island", description="Nassau and Suffolk County NY")
 
 session.add(longIsland)
 session.commit()
@@ -322,7 +322,7 @@ session.add(hamptonsChat)
 session.commit()
 
 # New Jersey
-newJersey = Region(name="New Jersey")
+newJersey = Region(name="New Jersey", description="The Garden State")
 
 session.add(newJersey)
 session.commit()
@@ -342,7 +342,7 @@ session.add(chicPea)
 session.commit()
 
 # Upstate
-upstate = Region(name="Upstate New York")
+upstate = Region(name="Upstate New York", description="Please don't take offense to the term Upstate")
 
 session.add(upstate)
 session.commit()
