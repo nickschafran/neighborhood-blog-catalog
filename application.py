@@ -198,6 +198,8 @@ def contact():
 # Create a new region
 @app.route('/region/new/', methods=['GET', 'POST'])
 def newRegion():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         newRegion = Region(name=request.form['name'])
         session.add(newRegion)
@@ -210,6 +212,8 @@ def newRegion():
 # Edit a region
 @app.route('/region/<int:region_id>/edit/', methods=['GET', 'POST'])
 def editRegion(region_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedRegion = session.query(
         Region).filter_by(id=region_id).one()
     if request.method == 'POST':
@@ -224,6 +228,8 @@ def editRegion(region_id):
 # Delete a region
 @app.route('/region/<int:region_id>/delete/', methods=['GET', 'POST'])
 def deleteRegion(region_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     regionToDelete = session.query(
         Region).filter_by(id=region_id).one()
     if request.method == 'POST':
@@ -250,6 +256,8 @@ def showBlogs(region_id):
 @app.route(
     '/region/<int:region_id>/blogs/new/', methods=['GET', 'POST'])
 def newRegionBlog(region_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         newItem = RegionBlog(
             name=request.form['name'], description=request.form['description'],
@@ -267,6 +275,8 @@ def newRegionBlog(region_id):
 @app.route('/region/<int:region_id>/blogs/<int:blog_id>/edit',
            methods=['GET', 'POST'])
 def editRegionBlog(region_id, blog_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedItem = session.query(RegionBlog).filter_by(id=blog_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -289,6 +299,8 @@ def editRegionBlog(region_id, blog_id):
 @app.route('/region/<int:region_id>/blogs/<int:blog_id>/delete',
            methods=['GET', 'POST'])
 def deleteRegionBlog(region_id, blog_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     itemToDelete = session.query(RegionBlog).filter_by(id=blog_id).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
