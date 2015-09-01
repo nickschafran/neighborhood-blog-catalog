@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Region, RegionBlog
+from database_setup import Base, Region, RegionBlog, User
 
 from flask import session as login_session
 import random
@@ -31,7 +31,7 @@ session = DBSession()
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in xrange(32))
+                    for x in range(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
 
@@ -107,6 +107,12 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
+    # see if user exists, if it doesn't make a new one
+    user_id = getUserID(login_session['email'])
+    if not user_id:
+        user_id = createUser(login_session)
+    login_session['user_id'] = user_id
+
     output = ''
     output += '<h1>Welcome, '
     output += login_session['username']
@@ -118,8 +124,30 @@ def gconnect():
     return output
 
 
-# Disconnect  - revoke a current user's token and reset their login_session
+# User Helper Functions
+def createUser(login_session):
+    newUser = User(name=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
+    session.add(newUser)
+    session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
 
+
+def getUserInfo(user_id):
+    user = session.query(User).filter_by(id=user_id).one()
+    return user
+
+
+def getUserID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
+
+
+# Disconnect  - revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
 def gdisconnect():
         # Only disconnect a connected user.
@@ -180,7 +208,10 @@ def regionsJSON():
 @app.route('/region/')
 def showRegions():
     regions = session.query(Region).all()
-    return render_template('regions.html', regions=regions)
+    if 'username' not in login_session:
+        return render_template('publicregions.html', regions=regions)
+    else:
+        return render_template('regions.html', regions=regions)
 
 
 # About page
@@ -203,7 +234,8 @@ def newRegion():
     if request.method == 'POST':
         # Region w/ description
         newRegion = Region(
-            name=request.form['name'], description=request.form['description'])
+            name=request.form['name'], description=request.form['description'],
+            user_id=login_session['user_id'])
 
         session.add(newRegion)
         session.commit()
@@ -250,9 +282,16 @@ def deleteRegion(region_id):
 @app.route('/region/<int:region_id>/blogs/')
 def showBlogs(region_id):
     region = session.query(Region).filter_by(id=region_id).one()
+    creator = getUserInfo(region.user_id)
     items = session.query(RegionBlog).filter_by(
         region_id=region_id).all()
-    return render_template('blogs.html', items=items, region=region)
+    if 'username' not in login_session or creator.id != login_session[
+            'user_id']:
+        return render_template(
+            'publicblogs.html', items=items, region=region, creator=creator)
+    else:
+        return render_template(
+            'blogs.html', items=items, region=region, creator=creator)
 
 
 # Create a new blog item
@@ -261,10 +300,14 @@ def showBlogs(region_id):
 def newRegionBlog(region_id):
     if 'username' not in login_session:
         return redirect('/login')
+    region = session.query(Region).filter_by(id=region_id).one()
     if request.method == 'POST':
         newItem = RegionBlog(
-            name=request.form['name'], description=request.form['description'],
-            url=request.form['url'], region_id=region_id)
+            name=request.form['name'],
+            description=request.form['description'],
+            url=request.form['url'],
+            region_id=region_id,
+            user_id=region.user_id)
         session.add(newItem)
         session.commit()
 #        flash("new blog added!")

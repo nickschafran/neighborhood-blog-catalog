@@ -43,7 +43,7 @@
 
       <div class="jumbotron">
         <h1>{{ region.name }}</h1>
-        <p class="lead">Description of this neighborhood? Blogs. Be sure to go on for a little bit. Should this all be set in stone or editable?</p>
+        <p class="lead">{{ region.description }}</p>
         <p><a class="btn btn-lg btn-success" href="{{url_for('newRegionBlog', region_id = region.id )}}" role="button">Add a Blog</a></p>
       </div>
 
@@ -53,7 +53,8 @@
           <div class="col-lg-3">
 
           <h4><a href = "{{i.url}}"><p>{{i.name}}</a></h4>
-          </p></a></h4><p>{{i.description}}</p></div>
+          </p></a></h4><p>{{i.description}}</p>
+          <p><a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Edit</a> <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Delete</a></p></div>
           {% endfor %}
 
 

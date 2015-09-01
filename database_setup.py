@@ -8,12 +8,24 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+class User(Base):
+    """Users"""
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)
+    email = Column(String(250), nullable=False)
+    picture = Column(String(250))
+
+
 class Region(Base):
     """Regional categories to which blogs belong"""
     __tablename__ = 'region'
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
     description = Column(String(250), nullable=False)
 
     @property
@@ -36,6 +48,8 @@ class RegionBlog(Base):
     url = Column(String(8))
     region_id = Column(Integer, ForeignKey('region.id'))
     region = relationship(Region)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):
