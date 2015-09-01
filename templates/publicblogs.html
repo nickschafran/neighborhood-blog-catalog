@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="icon" href"#">
+
+    <title>Neighborhood Blog Directory</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
+            <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
+            <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
+
+
+          </ul>
+        </nav>
+        <h3 class="text-muted">Neighborhood Blog Directory</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>{{ region.name }}</h1>
+        <p class="lead">{{ region.description }}</p>
+        <p><a class="btn btn-lg btn-success" href="{{url_for('newRegionBlog', region_id = region.id )}}" role="button">Add a Blog</a></p>
+      </div>
+
+      <div class="row marketing">
+        {% for i in items %}
+
+          <div class="col-lg-3">
+
+          <h4><a href = "{{i.url}}"><p>{{i.name}}</a></h4>
+          </p></a></h4><p>{{i.description}}</p>
+          <p><a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Edit</a> <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Delete</a></p></div>
+          {% endfor %}
+
+
+
+
+      </div>
+
+
+
+      <footer class="footer">
+       <!-- <p>&copy; Nicholas Schafran 2015</p> -->
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
