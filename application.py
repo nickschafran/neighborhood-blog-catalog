@@ -217,13 +217,19 @@ def showRegions():
 # About page
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    if 'username' not in login_session:
+        return render_template('publicabout.html')
+    else:
+        return render_template('about.html')
 
 
 # Contact page
 @app.route('/contact')
 def contact():
-    return render_template('contact.html')
+    if 'username' not in login_session:
+        return render_template('publiccontact.html')
+    else:
+        return render_template('contact.html')
 
 
 # Create a new region
