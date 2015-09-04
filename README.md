@@ -12,5 +12,5 @@ To build application:
 3. Run `application.py` to run the Flask application on `localhost:8080`.
 
 
-##References:
-* Course materials for Udacity's [Full Stack Foundations](https://www.udacity.com/course/full-stack-foundations--ud088) and [Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330)
+##Citations:
+* Course materials for Udacity's [Full Stack Foundations](https://www.udacity.com/course/full-stack-foundations--ud088) and [Authentication & Authorization: OAuth](https://www.udacity.com/course/authentication-authorization-oauth--ud330) used in development of the project, with authentication & authorization methods implemented directly from course materials.
