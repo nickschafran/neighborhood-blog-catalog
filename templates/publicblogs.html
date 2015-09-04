@@ -34,6 +34,7 @@
             <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
             <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
+            <li role="presentation"><a href="{{url_for('showLogin')}}">Login</a></li>
 
 
           </ul>
@@ -54,7 +55,7 @@
 
           <h4><a href = "{{i.url}}"><p>{{i.name}}</a></h4>
           </p></a></h4><p>{{i.description}}</p>
-          <p><a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Edit</a> <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Delete</a></p></div>
+      </div>
           {% endfor %}
 
 
