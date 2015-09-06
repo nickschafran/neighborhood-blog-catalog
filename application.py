@@ -14,6 +14,8 @@ import json
 from flask import make_response
 import requests
 
+from flask import flash
+
 app = Flask(__name__)
 
 CLIENT_ID = json.loads(
@@ -150,7 +152,7 @@ def getUserID(email):
 # Disconnect  - revoke a current user's token and reset their login_session
 @app.route('/gdisconnect')
 def gdisconnect():
-        # Only disconnect a connected user.
+    # Only disconnect a connected user.
     credentials = login_session.get('credentials')
     if credentials is None:
         response = make_response(
@@ -257,6 +259,9 @@ def editRegion(region_id):
         return redirect('/login')
     editedRegion = session.query(
         Region).filter_by(id=region_id).one()
+    if editedRegion.user_id != login_session['user_id']:
+        flash("You may only edit neighborhoods you have created!")
+        return redirect(url_for('showRegions'))
     if request.method == 'POST':
         if request.form['name']:
             editedRegion.name = request.form['name']
@@ -273,6 +278,9 @@ def deleteRegion(region_id):
         return redirect('/login')
     regionToDelete = session.query(
         Region).filter_by(id=region_id).one()
+    if regionToDelete.user_id != login_session['user_id']:
+        flash("You may only delete neighborhoods you have created!")
+        return redirect(url_for('showRegions'))
     if request.method == 'POST':
         session.delete(regionToDelete)
         session.commit()
@@ -291,8 +299,7 @@ def showBlogs(region_id):
     creator = getUserInfo(region.user_id)
     items = session.query(RegionBlog).filter_by(
         region_id=region_id).all()
-    if 'username' not in login_session or creator.id != login_session[
-            'user_id']:
+    if 'username' not in login_session:
         return render_template(
             'publicblogs.html', items=items, region=region, creator=creator)
     else:
@@ -316,7 +323,6 @@ def newRegionBlog(region_id):
             user_id=region.user_id)
         session.add(newItem)
         session.commit()
-#        flash("new blog added!")
         return redirect(url_for('showBlogs', region_id=region_id))
     else:
         return render_template('newRegionBlog.html', region_id=region_id)
@@ -330,6 +336,9 @@ def editRegionBlog(region_id, blog_id):
     if 'username' not in login_session:
         return redirect('/login')
     editedItem = session.query(RegionBlog).filter_by(id=blog_id).one()
+    if editedItem.user_id != login_session['user_id']:
+        flash("You may only edit blogs you have created!")
+        return redirect(url_for('showBlogs', region_id=region_id))
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -354,6 +363,9 @@ def deleteRegionBlog(region_id, blog_id):
     if 'username' not in login_session:
         return redirect('/login')
     itemToDelete = session.query(RegionBlog).filter_by(id=blog_id).one()
+    if itemToDelete.user_id != login_session['user_id']:
+        flash("You may only delete blogs you have created!")
+        return redirect(url_for('showBlogs', region_id=region_id))
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()

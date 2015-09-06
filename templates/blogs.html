@@ -26,7 +26,16 @@
   </head>
 
   <body>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
     <div class="container">
       <div class="header clearfix">
         <nav>
@@ -34,6 +43,7 @@
             <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
             <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
+            <li role="presentation"><a href="{{url_for('gdisconnect')}}">Log Out</a></li>
 
 
           </ul>
