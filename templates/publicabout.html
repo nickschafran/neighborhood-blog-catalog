@@ -26,7 +26,6 @@
   </head>
 
   <body>
-
     <div class="container">
       <div class="header clearfix">
         <nav>
@@ -35,35 +34,25 @@
             <li role="presentation" class = "active"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
             <li role="presentation"><a href="{{url_for('showLogin')}}">Login</a></li>
-
-
-
           </ul>
         </nav>
         <h3 class="text-muted">Neighborhood Blog Directory</h3>
       </div>
-
       <div class="jumbotron">
         <h1>Neighborhood Blog Directory</h1>
-        <p class="lead">Hi, my name's Nick Schafran. I developed this site while learning to use Flask, a python framework for web development. Here you'll find a catalog of the neighborhood blogs that shine a spotlight on local events and happenings all over the NYC metro region. The source code can be found <a href="https://github.com/nickschafran/neighborhood-blog-catalog">here</a>. Please don't hesitate to leave me feedback or suggestions! You can find my contact information <a href="{{url_for('contact')}}">here</a>. Thanks for visiting!</p>      </div>
-
+        <p class="lead">Hi, my name's Nick Schafran. I developed this site while learning to use <a href="http://flask.pocoo.org/">Flask</a>, a python framework for web development. Here you'll find a catalog of the neighborhood blogs that shine a spotlight on local events and happenings all over the NYC metro region. The source code can be found <a href="https://github.com/nickschafran/neighborhood-blog-catalog">here</a>. Please don't hesitate to leave me feedback or suggestions! You can find my contact information <a href="{{url_for('contact')}}">here</a>. Thanks for visiting!</p></div>
       <div class="row marketing">
           {% for region in regions %}
-
           <div class="col-lg-3">
-
           <h4><a href = "{{url_for('showBlogs', region_id = region.id)}}"><p>{{region.name}}</a></h4>
           </p></a></h4></div>
           {% endfor %}
-
       </div>
 
       <footer class="footer">
        <!-- <p>&copy; Nicholas Schafran 2015</p> -->
       </footer>
-
     </div> <!-- /container -->
-
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
