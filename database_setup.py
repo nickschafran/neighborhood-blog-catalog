@@ -45,7 +45,7 @@ class RegionBlog(Base):
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
     description = Column(String(250))
-    url = Column(String(8))
+    url = Column(String(250))
     region_id = Column(Integer, ForeignKey('region.id'))
     region = relationship(Region)
     user_id = Column(Integer, ForeignKey('user.id'))
