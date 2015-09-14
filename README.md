@@ -8,7 +8,7 @@ To build application:
 
 1. Run `database_setup.py` to create the sqlalchemy database.
 2. Run `lotsofblogs.py` to populate the database with the initial list of blogs.
-3. Run `application.py` to run the Flask application on `localhost:8080`.
+3. Run `application.py` to run the Flask application on `localhost:5000`.
 
 ##Dependencies:
 * [SQLAlchemy](http://www.sqlalchemy.org/)
