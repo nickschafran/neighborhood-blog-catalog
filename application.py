@@ -1,20 +1,17 @@
+from database_setup import Base, Region, RegionBlog, User
 from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import session as login_session
+from flask import make_response
+from flask import flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Region, RegionBlog, User
-
-from flask import session as login_session
-import random
-import string
-
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
+import random
+import string
 import httplib2
 import json
-from flask import make_response
 import requests
-
-from flask import flash
 
 app = Flask(__name__)
 
@@ -47,7 +44,6 @@ def gconnect():
         return response
     # Obtain authorization code
     code = request.data
-
     try:
         # Upgrade the authorization code into a credentials object
         oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
@@ -196,7 +192,6 @@ def regionBlogsJSON(region_id):
 def blogJSON(region_id, blog_id):
     Blog = session.query(RegionBlog).filter_by(id=blog_id).one()
     return jsonify(Blog=Blog.serialize)
-
 
 # Regions JSON
 @app.route('/region/JSON')
