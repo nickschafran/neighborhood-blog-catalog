@@ -1,6 +1,12 @@
+#!/usr/bin/env python
+#
+# lotsofblogs.py -- Populates database serving Neighborhood Blogs Flask
+# application with initial entries
+#
+# Author: Nick Schafran, Sept. 2015
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
 from database_setup import User, Region, Base, RegionBlog
 
 engine = create_engine('sqlite:///regionblogs.db')
@@ -10,7 +16,6 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # User
-
 User1 = User(
     name="Nick",
     email="nick@neighborhoods.com",
