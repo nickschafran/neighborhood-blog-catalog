@@ -1,5 +1,13 @@
+#!/usr/bin/env python
+#
+# database_setup.py -- Creates regionblogs.db to serve the neighborhood blogs
+# Flask application
+#
+# Author: Nick Schafran, Sept. 2015
+
 import os
 import sys
+
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -9,7 +17,7 @@ Base = declarative_base()
 
 
 class User(Base):
-    """Users"""
+    """Stores user information"""
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
