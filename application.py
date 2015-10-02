@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # application.py -- A Flask application which serves a user-contributable
-# directory of neighborhood blog
+# directory of neighborhood blogs
 #
 # Author: Nick Schafran, Sept. 2015
 
