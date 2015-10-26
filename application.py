@@ -27,8 +27,7 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Neighborhood Blogs App"
 
-engine = create_engine('sqlite:///regionblogs.db')
-Base.metadata.bind = engine
+engine = create_engine('postgresql://catalog:password@localhost/catalog')Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
