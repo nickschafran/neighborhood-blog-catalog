@@ -1,9 +1,5 @@
 #!/usr/bin/env python
-#
-# lotsofblogs.py -- Populates database serving Neighborhood Blogs Flask
-# application with initial entries
-#
-# Author: Nick Schafran, Sept. 2015
+"""Populate db serving Neighborhood Blogs app with initial entries."""
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -19,8 +15,7 @@ session = DBSession()
 User1 = User(
     name="Nick",
     email="nick@neighborhoods.com",
-    picture='http://talksport.com/sites/default/files/field/image/201308/diego-maradona.jpg'
-    )
+    picture='http://talksport.com/sites/default/files/field/image/201308/diego-maradona.jpg')
 session.add(User1)
 session.commit()
 
