@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """Populate db serving Neighborhood Blogs app with initial entries."""
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import User, Region, Base, RegionBlog

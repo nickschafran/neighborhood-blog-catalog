@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 """A Flask app which serves a user-contributable directory of blogs."""
-
 import random
 import string
 import httplib2
 import json
 import requests
-
 from database_setup import Base, Region, RegionBlog, User
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import session as login_session
@@ -18,7 +16,6 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 
 app = Flask(__name__)
-
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Neighborhood Blogs App"
