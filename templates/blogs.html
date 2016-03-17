@@ -44,7 +44,7 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
+            <li role="presentation"><a href="{{url_for('show_regions')}}">Home</a></li>
             <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
             <li role="presentation"><a href="{{url_for('gdisconnect')}}">Log Out</a></li>
@@ -58,7 +58,7 @@
       <div class="jumbotron">
         <h1>{{ region.name }}</h1>
         <p class="lead">{{ region.description }}</p>
-        <p><a class="btn btn-lg btn-success" href="{{url_for('newRegionBlog', region_id = region.id )}}" role="button">Add a Blog</a></p>
+        <p><a class="btn btn-lg btn-success" href="{{url_for('new_region_blog', region_id = region.id )}}" role="button">Add a Blog</a></p>
       </div>
 
       <div class="row marketing">
@@ -68,7 +68,7 @@
 
           <h4><a href = "{{i.url}}"><p>{{i.name}}</a></h4>
           </p></a></h4><p>{{i.description}}</p>
-          <p><a href='{{url_for('editRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Edit</a> <a href='{{url_for('deleteRegionBlog', region_id = region.id, blog_id=i.id ) }}'>Delete</a></p></div>
+          <p><a href='{{url_for('edit_region_blog', region_id = region.id, blog_id=i.id ) }}'>Edit</a> <a href='{{url_for('delete_region_blog', region_id = region.id, blog_id=i.id ) }}'>Delete</a></p></div>
           {% endfor %}
 
 

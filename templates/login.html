@@ -36,16 +36,16 @@
 </head>
 
 
-<body>  
+<body>
 
     <div class="container">
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
+            <li role="presentation"><a href="{{url_for('show_regions')}}">Home</a></li>
             <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
-            <li role="presentation" class="active"><a href="{{url_for('showLogin')}}">Login</a></li>
+            <li role="presentation" class="active"><a href="{{url_for('show_login')}}">Login</a></li>
 
 
           </ul>
@@ -59,7 +59,7 @@
 
 <!-- GOOGLE PLUS SIGN IN-->
 
-          
+
           <div id="signInButton">
           <span class="g-signin"
             data-scope="openid email"
@@ -95,7 +95,7 @@ function signInCallback(authResult) {
          setTimeout(function() {
           window.location.href = "/region";
          }, 4000);
-          
+
 
       } else if (authResult['error']) {
 
@@ -105,7 +105,7 @@ function signInCallback(authResult) {
          }
 
       }
-      
+
   }); } }
 </script>
 
