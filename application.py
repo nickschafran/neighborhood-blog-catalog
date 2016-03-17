@@ -6,14 +6,11 @@ import httplib2
 import json
 import requests
 from database_setup import Base, Region, RegionBlog, User
-from flask import Flask, render_template, request, redirect, jsonify, url_for
-from flask import session as login_session
-from flask import make_response
-from flask import flash
+from flask import (Flask, render_template, request, redirect, jsonify, url_for,
+                   session as login_session, make_response, flash)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from oauth2client.client import flow_from_clientsecrets
-from oauth2client.client import FlowExchangeError
+from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
 app = Flask(__name__)
 CLIENT_ID = json.loads(
