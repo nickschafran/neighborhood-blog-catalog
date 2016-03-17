@@ -12,4 +12,5 @@ I am currently working on getting it up and running on Heroku
 
 References:
 ----------
-* Course materials for Udacity's `Full Stack Foundations <https://www.udacity.com/course/full-stack-foundations--ud088>` and `Authentication & Authorization: OAuth <https://www.udacity.com/course/authentication-authorization-oauth--ud330>`.
+* Course materials for Udacity's `Full Stack Foundations <https://www.udacity.com/course/full-stack-foundations--ud088>`
+and `Authentication & Authorization: OAuth <https://www.udacity.com/course/authentication-authorization-oauth--ud330>`.
