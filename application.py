@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-"""A Flask app which serves a user-contributable directory of blogs."""
+"""A Flask app which serves a user-contributable directory of blogs.
+
+Users can log in with Google+ IDs to edit directory. The goal is to
+compile a directory of the disconnected network of ubiquitous
+neighborhood specific blogs.
+
+"""
 import random
 import string
 import httplib2
