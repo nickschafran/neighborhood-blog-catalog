@@ -1,10 +1,15 @@
 #!/usr/bin/env python
-"""Populate db serving Neighborhood Blogs app with initial entries."""
+#
+# lotsofblogs.py -- Populates database serving Neighborhood Blogs Flask
+# application with initial entries
+#
+# Author: Nick Schafran, Sept. 2015
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import User, Region, Base, RegionBlog
 
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('sqlite:///regionblogs.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -14,7 +19,8 @@ session = DBSession()
 User1 = User(
     name="Nick",
     email="nick@neighborhoods.com",
-    picture='http://talksport.com/sites/default/files/field/image/201308/diego-maradona.jpg')
+    picture='http://talksport.com/sites/default/files/field/image/201308/diego-maradona.jpg'
+    )
 session.add(User1)
 session.commit()
 

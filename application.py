@@ -1,29 +1,33 @@
 #!/usr/bin/env python
-"""A Flask app which serves a user-contributable directory of blogs.
+#
+# application.py -- A Flask application which serves a user-contributable
+# directory of neighborhood blogs
+#
+# Author: Nick Schafran, Sept. 2015
 
-Users can log in with Google+ IDs to edit directory. The goal is to
-compile a directory of the disconnected network of ubiquitous
-neighborhood specific blogs.
-
-"""
 import random
 import string
 import httplib2
 import json
 import requests
+
 from database_setup import Base, Region, RegionBlog, User
-from flask import (Flask, render_template, request, redirect, jsonify, url_for,
-                   session as login_session, make_response, flash)
+from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import session as login_session
+from flask import make_response
+from flask import flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
+from oauth2client.client import flow_from_clientsecrets
+from oauth2client.client import FlowExchangeError
 
 app = Flask(__name__)
+
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Neighborhood Blogs App"
 
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('sqlite:///regionblogs.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -31,8 +35,8 @@ session = DBSession()
 
 
 @app.route('/login')
-def show_login():
-    """Return login.html template."""
+def showLogin():
+    """Returns login.html template"""
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in range(32))
     login_session['state'] = state
@@ -41,7 +45,7 @@ def show_login():
 
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
-    """Validate state token."""
+    """Validate state token"""
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -110,40 +114,41 @@ def gconnect():
     login_session['email'] = data['email']
 
     # see if user exists, if it doesn't make a new one
-    user_id = get_user_id(login_session['email'])
+    user_id = getUserID(login_session['email'])
     if not user_id:
-        user_id = create_user(login_session)
+        user_id = createUser(login_session)
     login_session['user_id'] = user_id
 
-    output = ('<h1>Welcome, ' + login_session['username'] +
-              '!</h1><img src="' + login_session['picture'] +
-              ' " style = "width: 300px; height: 300px;border-radius:' +
-              ' 150px;-webkit-border-radius:' +
-              ' 150px;-moz-border-radius: 150px;"> ')
-
+    output = ''
+    output += '<h1>Welcome, '
+    output += login_session['username']
+    output += '!</h1>'
+    output += '<img src="'
+    output += login_session['picture']
+    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     print "done!"
     return output
 
 
 # User Helper Functions
-def create_user(login_session):
-    """Add user to db."""
-    new_user = User(name=login_session['username'], email=login_session[
-                    'email'], picture=login_session['picture'])
-    session.add(new_user)
+def createUser(login_session):
+    """Add user to db"""
+    newUser = User(name=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
+    session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
 
 
-def get_user_info(user_id):
-    """Return User Info."""
+def getUserInfo(user_id):
+    """Returns User Info"""
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
-def get_user_id(email):
-    """Return User ID."""
+def getUserID(email):
+    """Returns User ID"""
     try:
         user = session.query(User).filter_by(email=email).one()
         return user.id
@@ -153,7 +158,7 @@ def get_user_id(email):
 
 @app.route('/gdisconnect')
 def gdisconnect():
-    """Revoke a current user's token and reset their login_session."""
+    """Revoke a current user's token and reset their login_session"""
     credentials = login_session.get('credentials')
     if credentials is None:
         response = make_response(
@@ -184,31 +189,31 @@ def gdisconnect():
 
 
 @app.route('/region/<int:region_id>/blogs/JSON')
-def region_blogs_json(region_id):
-    """JSON Endpoint for Region Blogs."""
+def regionBlogsJSON(region_id):
+    """JSON Endpoint for Region Blogs"""
     items = session.query(RegionBlog).filter_by(
         region_id=region_id).all()
     return jsonify(RegionBlogs=[i.serialize for i in items])
 
 
 @app.route('/region/<int:region_id>/blogs/<int:blog_id>/JSON')
-def blog_json(region_id, blog_id):
-    """JSON Endpoint for specific blog."""
-    blog = session.query(RegionBlog).filter_by(id=blog_id).one()
-    return jsonify(blog=blog.serialize)
+def blogJSON(region_id, blog_id):
+    """JSON Endpoint for specific blog"""
+    Blog = session.query(RegionBlog).filter_by(id=blog_id).one()
+    return jsonify(Blog=Blog.serialize)
 
 
 @app.route('/region/JSON')
-def regions_json():
-    """JSON Endpoint for Regions."""
+def regionsJSON():
+    """JSON Endpoint for Regions"""
     regions = session.query(Region).all()
     return jsonify(regions=[r.serialize for r in regions])
 
 
 @app.route('/')
 @app.route('/region/')
-def show_regions():
-    """Show all Regions."""
+def showRegions():
+    """Show all Regions"""
     regions = session.query(Region).all()
     if 'username' not in login_session:
         return render_template('publicregions.html', regions=regions)
@@ -218,7 +223,7 @@ def show_regions():
 
 @app.route('/about')
 def about():
-    """About page."""
+    """About page"""
     if 'username' not in login_session:
         return render_template('publicabout.html')
     else:
@@ -227,7 +232,7 @@ def about():
 
 @app.route('/contact')
 def contact():
-    """Contact page."""
+    """Contact page"""
     if 'username' not in login_session:
         return render_template('publiccontact.html')
     else:
@@ -235,68 +240,68 @@ def contact():
 
 
 @app.route('/region/new/', methods=['GET', 'POST'])
-def new_region():
-    """Create a new page."""
+def newRegion():
+    """Create a new page"""
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
         # Region w/ description
-        new_region = Region(
+        newRegion = Region(
             name=request.form['name'], description=request.form['description'],
             user_id=login_session['user_id'])
 
-        session.add(new_region)
+        session.add(newRegion)
         session.commit()
-        return redirect(url_for('show_regions'))
+        return redirect(url_for('showRegions'))
     else:
-        return render_template('new_region.html')
+        return render_template('newRegion.html')
 
 
 @app.route('/region/<int:region_id>/edit/', methods=['GET', 'POST'])
-def edit_region(region_id):
-    """Edit a region."""
+def editRegion(region_id):
+    """Edit a region"""
     if 'username' not in login_session:
         return redirect('/login')
-    edited_region = session.query(
+    editedRegion = session.query(
         Region).filter_by(id=region_id).one()
-    if edited_region.user_id != login_session['user_id']:
+    if editedRegion.user_id != login_session['user_id']:
         flash("You may only edit neighborhoods you have created!")
-        return redirect(url_for('show_regions'))
+        return redirect(url_for('showRegions'))
     if request.method == 'POST':
         if request.form['name']:
-            edited_region.name = request.form['name']
-            return redirect(url_for('show_regions'))
+            editedRegion.name = request.form['name']
+            return redirect(url_for('showRegions'))
     else:
         return render_template(
-            'edit_region.html', region=edited_region)
+            'editRegion.html', region=editedRegion)
 
 
 @app.route('/region/<int:region_id>/delete/', methods=['GET', 'POST'])
-def delete_region(region_id):
-    """Delete a region."""
+def deleteRegion(region_id):
+    """Delete a region"""
     if 'username' not in login_session:
         return redirect('/login')
-    region_to_delete = session.query(
+    regionToDelete = session.query(
         Region).filter_by(id=region_id).one()
-    if region_to_delete.user_id != login_session['user_id']:
+    if regionToDelete.user_id != login_session['user_id']:
         flash("You may only delete neighborhoods you have created!")
-        return redirect(url_for('show_regions'))
+        return redirect(url_for('showRegions'))
     if request.method == 'POST':
-        session.delete(region_to_delete)
+        session.delete(regionToDelete)
         session.commit()
         return redirect(
-            url_for('show_regions', region_id=region_id))
+            url_for('showRegions', region_id=region_id))
     else:
         return render_template(
-            'delete_region.html', region=region_to_delete)
+            'deleteRegion.html', region=regionToDelete)
 
 
 @app.route('/region/<int:region_id>/')
 @app.route('/region/<int:region_id>/blogs/')
-def show_blogs(region_id):
-    """Show region blogs."""
+def showBlogs(region_id):
+    """Show region blogs"""
     region = session.query(Region).filter_by(id=region_id).one()
-    creator = get_user_info(region.user_id)
+    creator = getUserInfo(region.user_id)
     items = session.query(RegionBlog).filter_by(
         region_id=region_id).all()
     if 'username' not in login_session:
@@ -307,70 +312,71 @@ def show_blogs(region_id):
             'blogs.html', items=items, region=region, creator=creator)
 
 
-@app.route('/region/<int:region_id>/blogs/new/', methods=['GET', 'POST'])
-def new_region_blog(region_id):
-    """Create a new region blog."""
+@app.route(
+    '/region/<int:region_id>/blogs/new/', methods=['GET', 'POST'])
+def newRegionBlog(region_id):
+    """Create a new region blog"""
     if 'username' not in login_session:
         return redirect('/login')
     region = session.query(Region).filter_by(id=region_id).one()
     if request.method == 'POST':
-        new_item = RegionBlog(
+        newItem = RegionBlog(
             name=request.form['name'],
             description=request.form['description'],
             url=request.form['url'],
             region_id=region_id,
             user_id=region.user_id)
-        session.add(new_item)
+        session.add(newItem)
         session.commit()
-        return redirect(url_for('show_blogs', region_id=region_id))
+        return redirect(url_for('showBlogs', region_id=region_id))
     else:
-        return render_template('new_region_blog.html', region_id=region_id)
-    return render_template('new_region_blog.html', region=region)
+        return render_template('newRegionBlog.html', region_id=region_id)
+    return render_template('newRegionBlog.html', region=region)
 
 
 @app.route('/region/<int:region_id>/blogs/<int:blog_id>/edit',
            methods=['GET', 'POST'])
-def edit_region_blog(region_id, blog_id):
-    """Edit a blog item."""
+def editRegionBlog(region_id, blog_id):
+    """Edit a blog item"""
     if 'username' not in login_session:
         return redirect('/login')
-    edited_item = session.query(RegionBlog).filter_by(id=blog_id).one()
-    if edited_item.user_id != login_session['user_id']:
+    editedItem = session.query(RegionBlog).filter_by(id=blog_id).one()
+    if editedItem.user_id != login_session['user_id']:
         flash("You may only edit blogs you have created!")
-        return redirect(url_for('show_blogs', region_id=region_id))
+        return redirect(url_for('showBlogs', region_id=region_id))
     if request.method == 'POST':
         if request.form['name']:
-            edited_item.name = request.form['name']
+            editedItem.name = request.form['name']
         if request.form['description']:
-            edited_item.description = request.form['name']
+            editedItem.description = request.form['name']
         if request.form['url']:
-            edited_item.url = request.form['url']
-        session.add(edited_item)
+            editedItem.url = request.form['url']
+        session.add(editedItem)
         session.commit()
-        return redirect(url_for('show_blogs', region_id=region_id))
+        return redirect(url_for('showBlogs', region_id=region_id))
     else:
 
         return render_template(
-            'edit_region_blog.html', region_id=region_id, blog_id=blog_id,
-            item=edited_item)
+            'editRegionBlog.html', region_id=region_id, blog_id=blog_id,
+            item=editedItem)
 
 
 @app.route('/region/<int:region_id>/blogs/<int:blog_id>/delete',
            methods=['GET', 'POST'])
-def delete_region_blog(region_id, blog_id):
-    """Delete a region blog."""
+def deleteRegionBlog(region_id, blog_id):
+    """Delete a region blog"""
     if 'username' not in login_session:
         return redirect('/login')
-    item_to_delete = session.query(RegionBlog).filter_by(id=blog_id).one()
-    if item_to_delete.user_id != login_session['user_id']:
+    itemToDelete = session.query(RegionBlog).filter_by(id=blog_id).one()
+    if itemToDelete.user_id != login_session['user_id']:
         flash("You may only delete blogs you have created!")
-        return redirect(url_for('show_blogs', region_id=region_id))
+        return redirect(url_for('showBlogs', region_id=region_id))
     if request.method == 'POST':
-        session.delete(item_to_delete)
+        session.delete(itemToDelete)
         session.commit()
-        return redirect(url_for('show_blogs', region_id=region_id))
+        return redirect(url_for('showBlogs', region_id=region_id))
     else:
-        return render_template('delete_region_blog.html', item=item_to_delete)
+        return render_template('deleteRegionBlog.html', item=itemToDelete)
 
 
 if __name__ == '__main__':

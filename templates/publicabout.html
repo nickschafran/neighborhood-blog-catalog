@@ -30,10 +30,10 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="{{url_for('show_regions')}}">Home</a></li>
+            <li role="presentation"><a href="{{url_for('showRegions')}}">Home</a></li>
             <li role="presentation" class = "active"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
-            <li role="presentation"><a href="{{url_for('show_login')}}">Login</a></li>
+            <li role="presentation"><a href="{{url_for('showLogin')}}">Login</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">Neighborhood Blog Directory</h3>
@@ -44,7 +44,7 @@
       <div class="row marketing">
           {% for region in regions %}
           <div class="col-lg-3">
-          <h4><a href = "{{url_for('show_blogs', region_id = region.id)}}"><p>{{region.name}}</a></h4>
+          <h4><a href = "{{url_for('showBlogs', region_id = region.id)}}"><p>{{region.name}}</a></h4>
           </p></a></h4></div>
           {% endfor %}
       </div>

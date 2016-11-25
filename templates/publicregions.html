@@ -40,10 +40,10 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class = "active"><a href="{{url_for('show_regions')}}">Home</a></li>
+            <li role="presentation" class = "active"><a href="{{url_for('showRegions')}}">Home</a></li>
             <li role="presentation"><a href="{{url_for('about')}}">About</a></li>
             <li role="presentation"><a href="{{url_for('contact')}}">Contact</a></li>
-            <li role="presentation"><a href="{{url_for('show_login')}}">Login</a></li>
+            <li role="presentation"><a href="{{url_for('showLogin')}}">Login</a></li>
 
 
           </ul>
@@ -54,7 +54,7 @@
       <div class="jumbotron">
         <h1>Neighborhood Blogs</h1>
         <p class="lead">From finding out when a new restaurant is opening to complaining about that new eyesore development, neighborhood blogs keep you in tune with what's happening in your community.</p>
-        <p><a class="btn btn-lg btn-success" href="{{url_for('new_region')}}" role="button">Add a Neighborhood</a></p>
+        <p><a class="btn btn-lg btn-success" href="{{url_for('newRegion')}}" role="button">Add a Neighborhood</a></p>
       </div>
 
       <div class="row marketing">
@@ -62,7 +62,7 @@
 
           <div class="col-lg-3">
 
-          <h4><a href = "{{url_for('show_blogs', region_id = region.id)}}"><p>{{region.name}}</a></h4><p>{{region.description}}</p>
+          <h4><a href = "{{url_for('showBlogs', region_id = region.id)}}"><p>{{region.name}}</a></h4><p>{{region.description}}</p>
           </p></a></h4>
           </div>
           {% endfor %}

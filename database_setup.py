@@ -1,15 +1,23 @@
 #!/usr/bin/env python
-"""Create regionblogs.db to serve the neighborhood blogs app."""
-from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
+#
+# database_setup.py -- Creates regionblogs.db to serve the neighborhood blogs
+# Flask application
+#
+# Author: Nick Schafran, Sept. 2015
+
+import os
+import sys
+
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine
 
 Base = declarative_base()
 
 
 class User(Base):
-    """Store user information."""
-
+    """Stores user information"""
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
@@ -19,8 +27,7 @@ class User(Base):
 
 
 class Region(Base):
-    """Regional categories to which blogs belong."""
-
+    """Regional categories to which blogs belong"""
     __tablename__ = 'region'
 
     id = Column(Integer, primary_key=True)
@@ -31,7 +38,7 @@ class Region(Base):
 
     @property
     def serialize(self):
-        """Return object data in easily serializeable format."""
+        """Return object data in easily serializeable format"""
         return {
             'name': self.name,
             'id': self.id,
@@ -40,8 +47,7 @@ class Region(Base):
 
 
 class RegionBlog(Base):
-    """Blogs focusing on Regions."""
-
+    """Blogs focusing on Regions"""
     __tablename__ = 'region_blog'
 
     name = Column(String(80), nullable=False)
@@ -55,7 +61,7 @@ class RegionBlog(Base):
 
     @property
     def serialize(self):
-        """Return object data in easily serializeable format."""
+        """Return object data in easily serializeable format"""
         return {
             'name': self.name,
             'description': self.description,
@@ -64,6 +70,7 @@ class RegionBlog(Base):
         }
 
 
-engine = create_engine('postgresql://catalog:password@localhost/catalog')
+engine = create_engine('sqlite:///regionblogs.db')
+
 
 Base.metadata.create_all(engine)
